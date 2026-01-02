@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_usermanagement_app
+    restart: always
+    environment:
+      MYSQL_DATABASE: users
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_usermanagement_app_data:/var/lib/mysql
+      # Map the local sql file to the container's init folder
+#      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql this init script was used to create table when practicing servlets, now hibernate will create table automatically
+
+volumes:
+  mysql_usermanagement_app_data:

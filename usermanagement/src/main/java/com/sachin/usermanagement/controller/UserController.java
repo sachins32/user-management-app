@@ -23,11 +23,12 @@ public class UserController {
 
     @PostMapping("/user")
     public User saveUser(@RequestBody User user) {
+        System.out.println("User details: " + user.getId()); // 0
         return userService.saveUser(user);
     }
 
-    @DeleteMapping("/user")
-    public User removeUser(@RequestBody User user) {
-        return userService.removeUser(user);
+    @DeleteMapping("/user/{id}")
+    public String removeUser(@PathVariable int id) {
+        return userService.removeUser(id);
     }
 }

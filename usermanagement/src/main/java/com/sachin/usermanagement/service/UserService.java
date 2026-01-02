@@ -1,34 +1,36 @@
 package com.sachin.usermanagement.service;
 
 import com.sachin.usermanagement.model.User;
+import com.sachin.usermanagement.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserService {
 
-    private List<User> users = new ArrayList<>();
+    private UserRepository userRepository;
 
-    public UserService() {
-        User user = new User("dummy", "dummy@gmail.com", 10);
-        users.add(user);
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public List<User> getAllUsers() {
-        System.out.println(users);
-        return users;
+        return (List<User>) userRepository.findAll();
     }
 
     public User saveUser(User user) {
-        users.add(new User(user.getName(), user.getEmail(), user.getAge()));
+        System.out.println("user id before " + user.getId()); // 0
+        userRepository.save(user);
+        System.out.println("user id after " + user.getId());  // ID is generated and set when save is called
         return user;
     }
 
-
-    public User removeUser(User user) {
-        users.remove(user);
-        return user;
+    public String removeUser(int id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return "Deleted";
+        }
+        return "User Does not exists"; // or throw exceptions
     }
 }
