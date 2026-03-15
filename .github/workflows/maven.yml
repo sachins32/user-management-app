@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "simple_rest_api_arraylist_storage" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "simple_rest_api_arraylist_storage" ]
 
 jobs:
   build:
