@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  # PostgreSQL instance for 'prod' profile
+  postgres-prod:
+    image: postgres:15
+    container_name: postgres-prod
+    environment:
+      POSTGRES_DB: users
+      POSTGRES_USER: sachin # if missing,  it defaults to 'postgres'
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
